@@ -16,574 +16,97 @@
     --border: #e0d8cc;
     --swish: #e94f8b;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cream);
-    color: var(--dark);
-    min-height: 100vh;
-    font-weight: 300;
-  }
-
-  header {
-    background: var(--dark);
-    color: var(--cream);
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  }
-
-  .brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: var(--gold-light);
-  }
-
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; font-weight: 300; }
+  header { background: var(--dark); color: var(--cream); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: 0.08em; color: var(--gold-light); }
   .brand span { font-style: italic; color: var(--cream); }
-
-  .header-right {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 24px 16px 60px;
-  }
-
-  /* PRODUCT GRID */
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .product-btn {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 14px 10px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.18s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .product-btn:hover {
-    border-color: var(--gold);
-    background: #fffdf5;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(184,154,106,0.18);
-  }
-
-  .product-btn:active { transform: translateY(0); }
-
-  .product-btn.added {
-    animation: flash 0.3s ease;
-  }
-
-  @keyframes flash {
-    0% { background: var(--surface); }
-    50% { background: #fef8ec; border-color: var(--gold); }
-    100% { background: var(--surface); }
-  }
-
+  .header-right { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; margin-top: 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 10px; }
+  .product-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 10px; cursor: pointer; text-align: center; transition: all 0.18s ease; }
+  .product-btn:hover { border-color: var(--gold); background: #fffdf5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,154,106,0.18); }
+  .product-btn:active { transform: translateY(0); background: #fef8ec; border-color: var(--gold); }
+  .product-btn.added { animation: flash 0.3s ease; }
+  @keyframes flash { 0%{background:var(--surface)} 50%{background:#fef8ec;border-color:var(--gold)} 100%{background:var(--surface)} }
   .product-emoji { font-size: 1.4rem; margin-bottom: 6px; display: block; }
-  .product-name {
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    color: var(--dark);
-    margin-bottom: 4px;
-    font-weight: 400;
-  }
-  .product-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    color: var(--gold);
-    font-weight: 400;
-  }
-
-  /* CUSTOM PRODUCT */
-  .custom-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 28px;
-    align-items: flex-end;
-  }
-
-  .custom-row input {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: var(--dark);
-    flex: 1;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-
+  .product-name { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--dark); margin-bottom: 4px; font-weight: 400; }
+  .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); font-weight: 400; }
+  .custom-row { display: flex; gap: 8px; margin-bottom: 28px; margin-top: 20px; align-items: flex-end; }
+  .custom-row input { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--dark); flex: 1; outline: none; transition: border-color 0.15s; }
   .custom-row input:focus { border-color: var(--gold); }
   .custom-row input::placeholder { color: var(--muted); }
-
   .custom-row input[type="number"] { width: 100px; flex: none; }
-
-  .btn-add-custom {
-    background: var(--dark);
-    color: var(--cream);
-    border: none;
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-
+  .btn-add-custom { background: var(--dark); color: var(--cream); border: none; border-radius: 6px; padding: 10px 16px; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
   .btn-add-custom:hover { background: #2d2a20; }
-
-  /* CART */
-  .cart-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .cart-header {
-    background: var(--dark);
-    color: var(--cream);
-    padding: 12px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .cart-header-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    letter-spacing: 0.1em;
-    font-weight: 300;
-  }
-
-  .btn-clear {
-    background: none;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.6);
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
+  .cart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 28px; }
+  .cart-header { background: var(--dark); color: var(--cream); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; }
+  .cart-header-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: 0.1em; font-weight: 300; }
+  .btn-clear { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 4px 10px; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; cursor: pointer; transition: all 0.15s; }
   .btn-clear:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
-
-  .cart-empty {
-    padding: 32px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-  }
-
+  .cart-empty { padding: 32px; text-align: center; color: var(--muted); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
   .cart-items { padding: 0 18px; }
-
-  .cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    animation: slideIn 0.2s ease;
-  }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-8px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
+  .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); animation: slideIn 0.2s ease; }
+  @keyframes slideIn { from{opacity:0;transform:translateX(-8px)} to{opacity:1;transform:translateX(0)} }
   .cart-item:last-child { border-bottom: none; }
-
   .item-left { display: flex; align-items: center; gap: 10px; flex: 1; }
-  .item-name {
-    font-size: 0.88rem;
-    font-weight: 400;
-    color: var(--dark);
-  }
-
-  .qty-controls {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-left: auto;
-  }
-
-  .qty-btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--cream);
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--dark);
-    transition: all 0.12s;
-  }
-
+  .item-name { font-size: 0.88rem; font-weight: 400; color: var(--dark); }
+  .qty-controls { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--cream); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; color: var(--dark); transition: all 0.12s; }
   .qty-btn:hover { border-color: var(--gold); background: #fef8ec; }
-
-  .qty-num {
-    font-size: 0.88rem;
-    min-width: 20px;
-    text-align: center;
-    font-weight: 500;
-  }
-
-  .item-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    color: var(--dark);
-    min-width: 70px;
-    text-align: right;
-    margin-left: 12px;
-  }
-
-  .btn-remove {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0 0 0 10px;
-    line-height: 1;
-    transition: color 0.12s;
-  }
-
+  .qty-num { font-size: 0.88rem; min-width: 20px; text-align: center; font-weight: 500; }
+  .item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--dark); min-width: 70px; text-align: right; margin-left: 12px; }
+  .btn-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 0 0 0 10px; line-height: 1; transition: color 0.12s; }
   .btn-remove:hover { color: #c0392b; }
-
-  /* TOTALS */
-  .cart-totals {
-    padding: 16px 18px;
-    border-top: 1px solid var(--border);
-    background: #faf7f2;
-  }
-
-  .total-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  .total-row.main {
-    font-size: 1.2rem;
-    font-family: 'Cormorant Garamond', serif;
-    color: var(--dark);
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    font-weight: 400;
-  }
-
+  .cart-totals { padding: 16px 18px; border-top: 1px solid var(--border); background: #faf7f2; }
+  .total-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted); }
+  .total-row.main { font-size: 1.2rem; font-family: 'Cormorant Garamond', serif; color: var(--dark); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-weight: 400; }
   .total-row.main span:last-child { color: var(--gold); font-size: 1.4rem; }
-
-  /* SWISH PANEL */
-  .swish-section {
-    padding: 18px;
-    border-top: 2px solid var(--swish);
-    background: #fff;
-  }
-
-  .swish-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    color: var(--swish);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    letter-spacing: 0.06em;
-  }
-
-  .swish-amount-display {
-    font-size: 2.5rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    color: var(--dark);
-    text-align: center;
-    padding: 10px 0 4px;
-    letter-spacing: 0.04em;
-  }
-
-  .swish-amount-display span {
-    font-size: 1.2rem;
-    color: var(--muted);
-    vertical-align: super;
-  }
-
-  .swish-hint {
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-
-  .btn-swish {
-    width: 100%;
-    background: var(--swish);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 16px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-weight: 500;
-  }
-
-  .btn-swish:hover { background: #d43a76; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(233,79,139,0.3); }
-  .btn-swish:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
-
-  /* RECEIPT MODAL */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(26,23,16,0.7);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
+  .swish-section { padding: 18px; border-top: 2px solid var(--swish); background: #fff; }
+  .swish-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--swish); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.06em; }
+  .swish-amount-display { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; font-weight: 300; color: var(--dark); text-align: center; padding: 10px 0 4px; letter-spacing: 0.04em; }
+  .swish-amount-display span { font-size: 1.2rem; color: var(--muted); vertical-align: super; }
+  .swish-hint { text-align: center; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+  .btn-swish { width: 100%; background: var(--swish); color: white; border: none; border-radius: 8px; padding: 16px; font-family: 'Jost', sans-serif; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+  .btn-swish:hover { background: #d43a76; }
+  .btn-swish:disabled { background: #ccc; cursor: not-allowed; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,23,16,0.7); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
   .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: var(--surface);
-    border-radius: 12px;
-    width: 100%;
-    max-width: 380px;
-    overflow: hidden;
-    animation: modalIn 0.25s ease;
-  }
-
-  @keyframes modalIn {
-    from { opacity: 0; transform: scale(0.95) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .modal-header {
-    background: var(--dark);
-    color: var(--cream);
-    padding: 20px;
-    text-align: center;
-  }
-
-  .modal-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    margin-bottom: 4px;
-  }
-
-  .modal-header p {
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
+  .modal { background: var(--surface); border-radius: 12px; width: 100%; max-width: 380px; overflow: hidden; animation: modalIn 0.25s ease; }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.95) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
+  .modal-header { background: var(--dark); color: var(--cream); padding: 20px; text-align: center; }
+  .modal-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 4px; }
+  .modal-header p { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
   .receipt-body { padding: 20px; }
-
-  .receipt-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    padding: 5px 0;
-    color: var(--dark);
-  }
-
+  .receipt-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 5px 0; color: var(--dark); }
   .receipt-item .qty { color: var(--muted); margin-right: 6px; font-size: 0.78rem; }
-
   .receipt-divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
-
-  .receipt-total-block {
-    background: #faf7f2;
-    border-radius: 8px;
-    padding: 14px;
-    margin: 12px 0;
-    text-align: center;
-  }
-
+  .receipt-total-block { background: #faf7f2; border-radius: 8px; padding: 14px; margin: 12px 0; text-align: center; }
   .receipt-moms { font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; }
-
-  .receipt-total {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--swish);
-  }
-
+  .receipt-total { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--swish); }
   .receipt-total small { font-size: 1rem; color: var(--muted); vertical-align: super; }
-
-  .receipt-actions {
-    display: flex;
-    gap: 8px;
-    padding: 0 20px 20px;
-  }
-
-  .btn-modal {
-    flex: 1;
-    padding: 12px;
-    border-radius: 7px;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: none;
-    transition: all 0.15s;
-  }
-
-  .btn-modal.secondary {
-    background: var(--cream);
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
-
-  .btn-modal.secondary:hover { background: var(--border); }
-
-  .btn-modal.primary {
-    background: var(--dark);
-    color: var(--cream);
-  }
-
-  .btn-modal.primary:hover { background: #2d2a20; }
-
-  /* SALES LOG */
-  .sales-section {
-    margin-top: 28px;
-  }
-
-  .log-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--surface);
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    font-size: 0.82rem;
-  }
-
+  .receipt-actions { display: flex; gap: 8px; padding: 0 20px 20px; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 7px; font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-modal.secondary { background: var(--cream); color: var(--muted); border: 1px solid var(--border); }
+  .btn-modal.primary { background: var(--dark); color: var(--cream); }
+  .sales-section { margin-top: 28px; }
+  .log-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); font-size: 0.82rem; }
   .log-table thead { background: var(--dark); color: var(--cream); }
-  .log-table th {
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-  }
-
+  .log-table th { padding: 10px 14px; text-align: left; font-weight: 400; letter-spacing: 0.08em; font-size: 0.72rem; text-transform: uppercase; }
   .log-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
   .log-table tr:last-child td { border-bottom: none; }
   .log-table tr:nth-child(even) td { background: #faf8f4; }
-
-  .log-empty {
-    text-align: center;
-    color: var(--muted);
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    padding: 20px;
-  }
-
-  .sales-summary {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
-
-  .summary-card {
-    flex: 1;
-    min-width: 130px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-  }
-
-  .summary-card .label {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-
-  .summary-card .value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--dark);
-  }
-
+  .log-empty { text-align: center; color: var(--muted); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; padding: 20px; }
+  .sales-summary { display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 130px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .summary-card .label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .summary-card .value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--dark); }
   .summary-card.highlight .value { color: var(--gold); }
-
   @media (min-width: 700px) {
-    .container { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
-    .container > #productGrid,
-    .container > .section-title:nth-of-type(2),
-    .container > .custom-row { grid-column: 1; }
-    .container > .cart-section { grid-column: 2; grid-row: 1 / 10; position: sticky; top: 70px; }
-    .container > .sales-section { grid-column: 1 / 3; }
+    .layout { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
+    .layout-left { min-width: 0; }
+    .layout-right { position: sticky; top: 70px; }
     .product-grid { grid-template-columns: repeat(4, 1fr); }
   }
   @media (max-width: 500px) {
@@ -601,80 +124,109 @@
 </header>
 
 <div class="container">
+  <div class="layout">
 
-  <!-- PRODUCTS -->
-  <div id="productGrid"></div>
+    <!-- LEFT: PRODUCTS + CUSTOM -->
+    <div class="layout-left">
 
-  <!-- CUSTOM ITEM -->
-  <div class="section-title">Lägg till manuellt</div>
-  <div class="custom-row">
-    <input type="text" id="customName" placeholder="Namn på smycke…">
-    <input type="number" id="customPrice" placeholder="Pris (kr)" min="1" step="1">
-    <button class="btn-add-custom" onclick="addCustomItem()">+ Lägg till</button>
-  </div>
-
-  <!-- CART -->
-  <div class="cart-section">
-    <div class="cart-header">
-      <div class="cart-header-title">Varukorg</div>
-      <button class="btn-clear" onclick="clearCart()">Rensa</button>
-    </div>
-    <div id="cartItems">
-      <div class="cart-empty">Inga varor ännu — välj smycken ovan</div>
-    </div>
-    <div class="cart-totals" id="cartTotals" style="display:none">
-      <div class="total-row"><span>Exkl. moms (25%)</span><span id="exMoms">—</span></div>
-      <div class="total-row"><span>Moms</span><span id="momsAmt">—</span></div>
-      <div class="total-row main"><span>Att betala</span><span id="totalAmt">—</span></div>
-    </div>
-    <div class="swish-section" id="swishSection" style="display:none">
-      <div class="swish-title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="#e94f8b" stroke-width="2"/><path d="M8 12 C8 9, 16 9, 16 12 C16 15, 8 15, 8 12" stroke="#e94f8b" stroke-width="1.5" fill="none"/></svg>
-        Betalning via Swish
+      <div class="section-title" style="margin-top:0">Halsband</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Soulmate',239)"><span class="product-emoji">🔗</span><div class="product-name">Soulmate</div><div class="product-price">239 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Petals &amp; Pearls',199)"><span class="product-emoji">🌸</span><div class="product-name">Petals &amp; Pearls</div><div class="product-price">199 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Moonstone Heart',129)"><span class="product-emoji">🤍</span><div class="product-name">Moonstone Heart</div><div class="product-price">129 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Golden Clover',279)"><span class="product-emoji">🍀</span><div class="product-name">Golden Clover</div><div class="product-price">279 kr</div></button>
       </div>
-      <div class="swish-amount-display"><span>kr</span> <span id="swishAmount">0</span></div>
-      <div class="swish-hint">Visa för kunden</div>
-      <button class="btn-swish" id="swishBtn" onclick="openReceipt()" disabled>Bekräfta betalning</button>
-    </div>
-  </div>
+
+      <div class="section-title">Armband</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Clover (REA)',219)"><span class="product-emoji">🌿</span><div class="product-name">Clover (REA)</div><div class="product-price">219 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Stella',319)"><span class="product-emoji">⭐</span><div class="product-name">Stella</div><div class="product-price">319 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Nova',319)"><span class="product-emoji">🌟</span><div class="product-name">Nova</div><div class="product-price">319 kr</div></button>
+      </div>
+
+      <div class="section-title">Lockets &amp; Charms</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Bright Earrings',179)"><span class="product-emoji">✨</span><div class="product-name">Bright Earrings</div><div class="product-price">179 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Love Locket',179)"><span class="product-emoji">💌</span><div class="product-name">Love Locket</div><div class="product-price">179 kr</div></button>
+        <button class="product-btn" onclick="addToCart('777',129)"><span class="product-emoji">7️⃣</span><div class="product-name">777</div><div class="product-price">129 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Cupid',159)"><span class="product-emoji">💘</span><div class="product-name">Cupid</div><div class="product-price">159 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Rosett Earrings',199)"><span class="product-emoji">🎀</span><div class="product-name">Rosett Earrings</div><div class="product-price">199 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Nova Hoops',239)"><span class="product-emoji">⭕</span><div class="product-name">Nova Hoops</div><div class="product-price">239 kr</div></button>
+      </div>
+
+      <div class="section-title">✦ Handgjort</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Ms. Serpentine',149)"><span class="product-emoji">🐍</span><div class="product-name">Ms. Serpentine</div><div class="product-price">149 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Princess',149)"><span class="product-emoji">👑</span><div class="product-name">Princess</div><div class="product-price">149 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Lucky #7',129)"><span class="product-emoji">7️⃣</span><div class="product-name">Lucky #7</div><div class="product-price">129 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Mother Pearl',229)"><span class="product-emoji">🪷</span><div class="product-name">Mother Pearl</div><div class="product-price">229 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Färgglad',149)"><span class="product-emoji">🌈</span><div class="product-name">Färgglad</div><div class="product-price">149 kr</div></button>
+      </div>
+
+      <div class="section-title">Lägg till manuellt</div>
+      <div class="custom-row">
+        <input type="text" id="customName" placeholder="Namn på smycke…">
+        <input type="number" id="customPrice" placeholder="Pris (kr)" min="1" step="1">
+        <button class="btn-add-custom" onclick="addCustomItem()">+ Lägg till</button>
+      </div>
+
+    </div><!-- /layout-left -->
+
+    <!-- RIGHT: CART -->
+    <div class="layout-right">
+      <div class="cart-section">
+        <div class="cart-header">
+          <div class="cart-header-title">Varukorg</div>
+          <button class="btn-clear" onclick="clearCart()">Rensa</button>
+        </div>
+        <div id="cartItems">
+          <div class="cart-empty">Inga varor ännu — välj smycken</div>
+        </div>
+        <div class="cart-totals" id="cartTotals" style="display:none">
+          <div class="total-row"><span>Exkl. moms (25%)</span><span id="exMoms">—</span></div>
+          <div class="total-row"><span>Moms</span><span id="momsAmt">—</span></div>
+          <div class="total-row main"><span>Att betala</span><span id="totalAmt">—</span></div>
+        </div>
+        <div class="swish-section" id="swishSection" style="display:none">
+          <div class="swish-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="#e94f8b" stroke-width="2"/><path d="M8 12 C8 9, 16 9, 16 12 C16 15, 8 15, 8 12" stroke="#e94f8b" stroke-width="1.5" fill="none"/></svg>
+            Betalning via Swish
+          </div>
+          <div class="swish-amount-display"><span>kr</span> <span id="swishAmount">0</span></div>
+          <div class="swish-hint">Visa för kunden</div>
+          <button class="btn-swish" id="swishBtn" onclick="openReceipt()" disabled>Bekräfta betalning</button>
+        </div>
+      </div>
+    </div><!-- /layout-right -->
+
+  </div><!-- /layout -->
 
   <!-- SALES LOG -->
   <div class="sales-section">
-    <div class="section-title" style="display:flex;justify-content:space-between;align-items:center">
+    <div class="section-title" style="display:flex;justify-content:space-between;align-items:center;margin-top:28px">
       <span>Försäljning idag</span>
-      <div style="display:flex;gap:8px"><button onclick="exportCSV()" style="font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid var(--border);padding:4px 10px;border-radius:4px;cursor:pointer;color:var(--muted)">↓ Exportera</button><button onclick="clearDay()" style="font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid #e0bcbc;padding:4px 10px;border-radius:4px;cursor:pointer;color:#c0392b">✕ Ny dag</button></div>
+      <div style="display:flex;gap:8px">
+        <button onclick="exportCSV()" style="font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid var(--border);padding:4px 10px;border-radius:4px;cursor:pointer;color:var(--muted)">↓ Exportera</button>
+        <button onclick="clearDay()" style="font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid #e0bcbc;padding:4px 10px;border-radius:4px;cursor:pointer;color:#c0392b">✕ Ny dag</button>
+      </div>
     </div>
     <div class="sales-summary">
-      <div class="summary-card highlight">
-        <div class="label">Total inkl. moms</div>
-        <div class="value" id="sumTotal">0 kr</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Moms (25%)</div>
-        <div class="value" id="sumMoms">0 kr</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Antal köp</div>
-        <div class="value" id="sumCount">0</div>
-      </div>
+      <div class="summary-card highlight"><div class="label">Total inkl. moms</div><div class="value" id="sumTotal">0 kr</div></div>
+      <div class="summary-card"><div class="label">Moms (25%)</div><div class="value" id="sumMoms">0 kr</div></div>
+      <div class="summary-card"><div class="label">Antal köp</div><div class="value" id="sumCount">0</div></div>
     </div>
     <table class="log-table">
-      <thead>
-        <tr><th>Tid</th><th>Varor</th><th>Exkl. moms</th><th>Moms</th><th>Totalt</th></tr>
-      </thead>
+      <thead><tr><th>Tid</th><th>Varor</th><th>Exkl. moms</th><th>Moms</th><th>Totalt</th></tr></thead>
       <tbody id="salesLog"><tr><td colspan="5" class="log-empty">Inga försäljningar ännu</td></tr></tbody>
     </table>
   </div>
 
-</div>
+</div><!-- /container -->
 
 <!-- RECEIPT MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <div class="modal-header">
-      <h2>Kvitto</h2>
-      <p>luckygirlarchive</p>
-    </div>
+    <div class="modal-header"><h2>Kvitto</h2><p>luckygirlarchive</p></div>
     <div class="receipt-body" id="receiptBody"></div>
     <div class="receipt-actions">
       <button class="btn-modal secondary" onclick="closeModal()">Avbryt</button>
@@ -684,45 +236,17 @@
 </div>
 
 <script>
-// ── PRODUCTS ─────────────────────────────────────────────────────────────────
-const PRODUCTS = [
-  // Halsband
-  { name: "Soulmate", price: 239, emoji: "🔗", cat: "Halsband" },
-  { name: "Petals & Pearls", price: 199, emoji: "🌸", cat: "Halsband" },
-  { name: "Moonstone Heart", price: 129, emoji: "🤍", cat: "Halsband" },
-  { name: "Golden Clover", price: 279, emoji: "🍀", cat: "Halsband" },
-  // Armband
-  { name: "Clover (REA)", price: 219, emoji: "🌿", cat: "Armband" },
-  { name: "Stella", price: 319, emoji: "⭐", cat: "Armband" },
-  { name: "Nova", price: 319, emoji: "🌟", cat: "Armband" },
-  // Lockets & Charms
-  { name: "Bright Earrings", price: 179, emoji: "✨", cat: "Lockets & Charms" },
-  { name: "Love Locket", price: 179, emoji: "💌", cat: "Lockets & Charms" },
-  { name: "777", price: 129, emoji: "7️⃣", cat: "Lockets & Charms" },
-  { name: "Cupid", price: 159, emoji: "💘", cat: "Lockets & Charms" },
-  { name: "Rosett Earrings", price: 199, emoji: "🎀", cat: "Lockets & Charms" },
-  { name: "Nova Hoops", price: 239, emoji: "⭕", cat: "Lockets & Charms" },
-  // Handgjort
-  { name: "Ms. Serpentine", price: 149, emoji: "🐍", cat: "Handgjort" },
-  { name: "Princess", price: 149, emoji: "👑", cat: "Handgjort" },
-  { name: "Lucky #7", price: 129, emoji: "7️⃣", cat: "Handgjort" },
-  { name: "Mother Pearl", price: 229, emoji: "🪷", cat: "Handgjort" },
-  { name: "Färgglad", price: 149, emoji: "🌈", cat: "Handgjort" },
-];
-
 const VAT_RATE = 0.25;
-
 let cart = [];
 let salesLog = [];
 
-// ── LOCAL STORAGE ─────────────────────────────────────────────────────────
+// ── LOCAL STORAGE ──────────────────────────────────────────────────────────
 function saveState() {
   try {
     localStorage.setItem('lga_cart', JSON.stringify(cart));
     localStorage.setItem('lga_log', JSON.stringify(salesLog));
   } catch(e) {}
 }
-
 function loadState() {
   try {
     const c = localStorage.getItem('lga_cart');
@@ -731,88 +255,44 @@ function loadState() {
     if (l) salesLog = JSON.parse(l);
   } catch(e) {}
 }
-
 function clearDay() {
   if (!confirm('Rensa hela dagens försäljning? (Kan inte ångras)')) return;
-  salesLog = [];
-  cart = [];
-  saveState();
-  renderCart();
-  updateSalesSummary();
-  renderLog();
-}
-
-// ── RENDER PRODUCTS ────────────────────────────────────────────────────────
-function renderProducts() {
-  const grid = document.getElementById('productGrid');
-  const cats = [...new Set(PRODUCTS.map(p => p.cat))];
-  grid.innerHTML = cats.map(cat => {
-    const items = PRODUCTS.map((p, i) => ({ ...p, i })).filter(p => p.cat === cat);
-    return `
-      <div class="section-title" style="margin-top:20px">${cat === 'Handgjort' ? '✦ ' + cat : cat}</div>
-      <div class="product-grid">
-        ${items.map(p => `
-          <button class="product-btn" onclick="addToCart(${p.i})" id="pbtn${p.i}">
-            <span class="product-emoji">${p.emoji}</span>
-            <div class="product-name">${p.name}</div>
-            <div class="product-price">${p.price} kr</div>
-          </button>
-        `).join('')}
-      </div>
-    `;
-  }).join('');
+  salesLog = []; cart = [];
+  saveState(); renderCart(); updateSalesSummary(); renderLog();
 }
 
 // ── CART ──────────────────────────────────────────────────────────────────
-function addToCart(productIndex) {
-  const p = PRODUCTS[productIndex];
-  const existing = cart.find(i => i.name === p.name && i.price === p.price);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ name: p.name, price: p.price, qty: 1 });
-  }
-  const btn = document.getElementById('pbtn' + productIndex);
-  btn.classList.add('added');
-  setTimeout(() => btn.classList.remove('added'), 300);
-  saveState();
-  renderCart();
+function addToCart(name, price) {
+  const existing = cart.find(i => i.name === name && i.price === price);
+  if (existing) existing.qty++;
+  else cart.push({ name, price, qty: 1 });
+  saveState(); renderCart();
 }
-
 function addCustomItem() {
   const name = document.getElementById('customName').value.trim();
   const price = parseInt(document.getElementById('customPrice').value);
-  if (!name || !price || price < 1) return alert('Fyll i namn och pris.');
+  if (!name || !price || price < 1) { alert('Fyll i namn och pris.'); return; }
   const existing = cart.find(i => i.name === name && i.price === price);
   if (existing) existing.qty++;
   else cart.push({ name, price, qty: 1 });
   document.getElementById('customName').value = '';
   document.getElementById('customPrice').value = '';
-  saveState();
-  renderCart();
+  saveState(); renderCart();
 }
-
 function changeQty(index, delta) {
   cart[index].qty += delta;
   if (cart[index].qty <= 0) cart.splice(index, 1);
-  saveState();
-  renderCart();
+  saveState(); renderCart();
 }
-
 function removeItem(index) {
   cart.splice(index, 1);
-  saveState();
-  renderCart();
+  saveState(); renderCart();
 }
-
 function clearCart() {
   if (cart.length === 0) return;
   if (!confirm('Rensa varukorgen?')) return;
-  cart = [];
-  saveState();
-  renderCart();
+  cart = []; saveState(); renderCart();
 }
-
 function getTotal() {
   return cart.reduce((s, i) => s + i.price * i.qty, 0);
 }
@@ -820,21 +300,19 @@ function getTotal() {
 function renderCart() {
   const container = document.getElementById('cartItems');
   const totalsDiv = document.getElementById('cartTotals');
-  const swishDiv = document.getElementById('swishSection');
-  const swishBtn = document.getElementById('swishBtn');
-
+  const swishDiv  = document.getElementById('swishSection');
+  const swishBtn  = document.getElementById('swishBtn');
   if (cart.length === 0) {
-    container.innerHTML = '<div class="cart-empty">Inga varor ännu — välj smycken ovan</div>';
+    container.innerHTML = '<div class="cart-empty">Inga varor ännu — välj smycken</div>';
     totalsDiv.style.display = 'none';
-    swishDiv.style.display = 'none';
+    swishDiv.style.display  = 'none';
     return;
   }
-
   container.innerHTML = '<div class="cart-items">' + cart.map((item, i) => `
     <div class="cart-item">
       <div class="item-left">
         <span class="item-name">${item.name}</span>
-        <span style="font-size:0.78rem;color:var(--muted);margin-left:4px">${item.price} kr/st</span>
+        <span style="font-size:0.75rem;color:var(--muted);margin-left:4px">${item.price} kr/st</span>
       </div>
       <div class="qty-controls">
         <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
@@ -846,108 +324,68 @@ function renderCart() {
     </div>
   `).join('') + '</div>';
 
-  const total = getTotal();
-  const moms = Math.round(total * (VAT_RATE / (1 + VAT_RATE)));
+  const total  = getTotal();
+  const moms   = Math.round(total * (VAT_RATE / (1 + VAT_RATE)));
   const exMoms = total - moms;
-
-  document.getElementById('exMoms').textContent = exMoms + ' kr';
-  document.getElementById('momsAmt').textContent = moms + ' kr';
-  document.getElementById('totalAmt').textContent = total + ' kr';
+  document.getElementById('exMoms').textContent      = exMoms + ' kr';
+  document.getElementById('momsAmt').textContent     = moms   + ' kr';
+  document.getElementById('totalAmt').textContent    = total  + ' kr';
   document.getElementById('swishAmount').textContent = total;
-
   totalsDiv.style.display = 'block';
-  swishDiv.style.display = 'block';
+  swishDiv.style.display  = 'block';
   swishBtn.disabled = false;
 }
 
 // ── RECEIPT ───────────────────────────────────────────────────────────────
 function openReceipt() {
-  const total = getTotal();
-  const moms = Math.round(total * (VAT_RATE / (1 + VAT_RATE)));
+  const total  = getTotal();
+  const moms   = Math.round(total * (VAT_RATE / (1 + VAT_RATE)));
   const exMoms = total - moms;
-
-  const itemsHtml = cart.map(i => `
-    <div class="receipt-item">
-      <span><span class="qty">${i.qty}×</span>${i.name}</span>
-      <span>${i.price * i.qty} kr</span>
-    </div>
-  `).join('');
-
-  document.getElementById('receiptBody').innerHTML = `
-    ${itemsHtml}
-    <hr class="receipt-divider">
-    <div class="receipt-total-block">
-      <div class="receipt-moms">Inkl. moms (25%): ${moms} kr &nbsp;|&nbsp; Exkl.: ${exMoms} kr</div>
-      <div class="receipt-total"><small>kr</small> ${total}</div>
-    </div>
-  `;
+  document.getElementById('receiptBody').innerHTML =
+    cart.map(i => `<div class="receipt-item"><span><span class="qty">${i.qty}×</span>${i.name}</span><span>${i.price * i.qty} kr</span></div>`).join('') +
+    `<hr class="receipt-divider"><div class="receipt-total-block"><div class="receipt-moms">Inkl. moms (25%): ${moms} kr &nbsp;|&nbsp; Exkl.: ${exMoms} kr</div><div class="receipt-total"><small>kr</small> ${total}</div></div>`;
   document.getElementById('modal').classList.add('open');
 }
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-}
-
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
 function confirmSale() {
-  const total = getTotal();
-  const moms = Math.round(total * (VAT_RATE / (1 + VAT_RATE)));
+  const total  = getTotal();
+  const moms   = Math.round(total * (VAT_RATE / (1 + VAT_RATE)));
   const exMoms = total - moms;
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
-  const itemSummary = cart.map(i => `${i.qty}× ${i.name}`).join(', ');
-
-  salesLog.push({ time: timeStr, items: itemSummary, exMoms, moms, total, cartSnap: [...cart] });
+  const timeStr = new Date().toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+  salesLog.push({ time: timeStr, items: cart.map(i => `${i.qty}× ${i.name}`).join(', '), exMoms, moms, total });
   cart = [];
-  saveState();
-  renderCart();
-  updateSalesSummary();
-  renderLog();
-  closeModal();
+  saveState(); renderCart(); updateSalesSummary(); renderLog(); closeModal();
 }
 
 // ── SALES LOG ─────────────────────────────────────────────────────────────
 function renderLog() {
   const tbody = document.getElementById('salesLog');
-  if (salesLog.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" class="log-empty">Inga försäljningar ännu</td></tr>';
-    return;
-  }
-  tbody.innerHTML = salesLog.slice().reverse().map(s => `
-    <tr>
-      <td>${s.time}</td>
-      <td style="color:var(--muted);max-width:180px">${s.items}</td>
-      <td>${s.exMoms} kr</td>
-      <td>${s.moms} kr</td>
-      <td style="font-weight:500">${s.total} kr</td>
-    </tr>
-  `).join('');
+  if (salesLog.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="log-empty">Inga försäljningar ännu</td></tr>'; return; }
+  tbody.innerHTML = salesLog.slice().reverse().map(s =>
+    `<tr><td>${s.time}</td><td style="color:var(--muted)">${s.items}</td><td>${s.exMoms} kr</td><td>${s.moms} kr</td><td style="font-weight:500">${s.total} kr</td></tr>`
+  ).join('');
 }
-
 function updateSalesSummary() {
-  const tot = salesLog.reduce((s, r) => s + r.total, 0);
-  const moms = salesLog.reduce((s, r) => s + r.moms, 0);
-  document.getElementById('sumTotal').textContent = tot + ' kr';
-  document.getElementById('sumMoms').textContent = moms + ' kr';
+  document.getElementById('sumTotal').textContent = salesLog.reduce((s,r) => s+r.total, 0) + ' kr';
+  document.getElementById('sumMoms').textContent  = salesLog.reduce((s,r) => s+r.moms,  0) + ' kr';
   document.getElementById('sumCount').textContent = salesLog.length;
 }
 
 // ── EXPORT CSV ────────────────────────────────────────────────────────────
 function exportCSV() {
-  if (salesLog.length === 0) return alert('Inga försäljningar att exportera.');
+  if (salesLog.length === 0) { alert('Inga försäljningar att exportera.'); return; }
   const rows = [['Tid','Varor','Exkl. moms','Moms','Totalt']];
   salesLog.forEach(s => rows.push([s.time, s.items, s.exMoms, s.moms, s.total]));
-  const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  const csv  = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  const d = new Date();
-  a.download = `luckygirlarchive_${d.toISOString().slice(0,10)}.csv`;
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(blob);
+  a.download = `luckygirlarchive_${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────
 loadState();
-renderProducts();
 renderCart();
 updateSalesSummary();
 renderLog();
