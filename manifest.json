@@ -1,0 +1,16 @@
+{
+  "name": "Lucky Girl Kassa",
+  "short_name": "Kassa",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#7a1a1a",
+  "theme_color": "#1a1710",
+  "icons": [
+    {
+      "src": "LOGO-L__1_.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
