@@ -1,29 +1,496 @@
-  </div> <!-- container -->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>luckygirlarchive — Kassa</title>
+<style>
+  :root {
+    --cream: #f5f0e8; --dark: #1a1710; --gold: #b89a6a; --gold-light: #d4b896;
+    --muted: #7a7060; --surface: #fffef9; --border: #e0d8cc; --swish: #e94f8b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; font-weight: 300; }
+  header { background: var(--dark); color: var(--cream); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+  .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: 0.08em; color: var(--gold-light); }
+  .brand span { font-style: italic; color: var(--cream); }
+  .header-right { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; margin-top: 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 10px; }
+  .product-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 10px; cursor: pointer; text-align: center; transition: all 0.18s ease; }
+  .product-btn:hover { border-color: var(--gold); background: #fffdf5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,154,106,0.18); }
+  .product-btn:active { transform: translateY(0); background: #fef8ec; border-color: var(--gold); }
+  .product-emoji { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+  .product-name { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--dark); margin-bottom: 4px; font-weight: 400; }
+  .product-price { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); font-weight: 400; }
+  .custom-row { display: flex; gap: 8px; margin-bottom: 28px; margin-top: 20px; align-items: flex-end; }
+  .custom-row input { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--dark); flex: 1; outline: none; transition: border-color 0.15s; }
+  .custom-row input:focus { border-color: var(--gold); }
+  .custom-row input::placeholder { color: var(--muted); }
+  .custom-row input[type="number"] { width: 100px; flex: none; }
+  .btn-add-custom { background: var(--dark); color: var(--cream); border: none; border-radius: 6px; padding: 10px 16px; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+  .btn-add-custom:hover { background: #2d2a20; }
+  .cart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 28px; }
+  .cart-header { background: var(--dark); color: var(--cream); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; }
+  .cart-header-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: 0.1em; font-weight: 300; }
+  .btn-clear { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 4px 10px; border-radius: 4px; font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; cursor: pointer; transition: all 0.15s; }
+  .btn-clear:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .cart-empty { padding: 32px; text-align: center; color: var(--muted); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+  .cart-items { padding: 0 18px; }
+  .cart-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .cart-item:last-child { border-bottom: none; }
+  .item-left { display: flex; align-items: center; gap: 10px; flex: 1; }
+  .item-name { font-size: 0.88rem; font-weight: 400; color: var(--dark); }
+  .qty-controls { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--cream); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; color: var(--dark); transition: all 0.12s; }
+  .qty-btn:hover { border-color: var(--gold); background: #fef8ec; }
+  .qty-num { font-size: 0.88rem; min-width: 20px; text-align: center; font-weight: 500; }
+  .item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--dark); min-width: 70px; text-align: right; margin-left: 12px; }
+  .btn-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 0 0 0 10px; line-height: 1; transition: color 0.12s; }
+  .btn-remove:hover { color: #c0392b; }
+  .cart-totals { padding: 16px 18px; border-top: 1px solid var(--border); background: #faf7f2; }
+  .total-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85rem; color: var(--muted); }
+  .total-row.main { font-size: 1.2rem; font-family: 'Cormorant Garamond', serif; color: var(--dark); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-weight: 400; }
+  .total-row.main span:last-child { color: var(--gold); font-size: 1.4rem; }
+  .swish-section { padding: 18px; border-top: 2px solid var(--swish); background: #fff; }
+  .swish-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--swish); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.06em; }
+  .payment-buttons { display: flex; gap: 10px; }
+  .btn-swish, .btn-kort { flex: 1; border: none; border-radius: 8px; padding: 16px; font-family: 'Jost', sans-serif; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+  .btn-swish { background: var(--swish); color: white; }
+  .btn-swish:hover { background: #d43a76; }
+  .btn-kort { background: var(--dark); color: var(--cream); }
+  .btn-kort:hover { background: #2d2a20; }
+  .btn-swish:disabled, .btn-kort:disabled { background: #ccc; cursor: not-allowed; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,23,16,0.7); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border-radius: 12px; width: 100%; max-width: 380px; overflow: hidden; }
+  .modal-header { background: var(--dark); color: var(--cream); padding: 20px; text-align: center; }
+  .modal-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.12em; margin-bottom: 4px; }
+  .modal-header p { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .receipt-body { padding: 20px; max-height: 50vh; overflow-y: auto; }
+  .receipt-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 5px 0; color: var(--dark); }
+  .receipt-item .qty { color: var(--muted); margin-right: 6px; font-size: 0.78rem; }
+  .receipt-divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+  .receipt-total-block { background: #faf7f2; border-radius: 8px; padding: 14px; margin: 12px 0; text-align: center; }
+  .receipt-moms { font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; }
+  .receipt-total { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--swish); }
+  .receipt-total small { font-size: 1rem; color: var(--muted); vertical-align: super; }
+  .receipt-actions { display: flex; gap: 8px; padding: 0 20px 20px; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 7px; font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-modal.secondary { background: var(--cream); color: var(--muted); border: 1px solid var(--border); }
+  .btn-modal.primary { background: var(--dark); color: var(--cream); }
+  .sales-section { margin-top: 28px; }
+  .log-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); font-size: 0.82rem; }
+  .log-table thead { background: var(--dark); color: var(--cream); }
+  .log-table th { padding: 10px 14px; text-align: left; font-weight: 400; letter-spacing: 0.08em; font-size: 0.72rem; text-transform: uppercase; }
+  .log-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .log-table tr:last-child td { border-bottom: none; }
+  .log-table tr:nth-child(even) td { background: #faf8f4; }
+  .log-empty { text-align: center; color: var(--muted); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; padding: 20px; }
+  .sales-summary { display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 130px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+  .summary-card .label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .summary-card .value { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--dark); }
+  .summary-card.highlight .value { color: var(--gold); }
+  @media (min-width: 700px) {
+    .layout { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
+    .layout-left { min-width: 0; }
+    .layout-right { position: sticky; top: 70px; }
+    .product-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+    .custom-row { flex-wrap: wrap; }
+    .custom-row input[type="text"] { flex: 100%; }
+  }
+</style>
+</head>
+<body>
 
-  <script>
-    let cart = [];
-    let salesLog = [];
+<header>
+  <div class="brand">lucky<span>girl</span>archive</div>
+  <div class="header-right">Kassa · Marknad</div>
+</header>
 
-    function addToCart(name, price) {
-      // ...
+<div class="container">
+  <div class="layout">
+
+    <div class="layout-left">
+
+      <div class="section-title" style="margin-top:0">Halsband</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Billie',279)"><span class="product-emoji">🌸</span><div class="product-name">Billie</div><div class="product-price">279 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Honey',239)"><span class="product-emoji">🍯</span><div class="product-name">Honey</div><div class="product-price">239 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Soulmate',199)"><span class="product-emoji">🔗</span><div class="product-name">Soulmate (REA)</div><div class="product-price">199 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Athena Halsband',279)"><span class="product-emoji">⭐</span><div class="product-name">Athena Halsband</div><div class="product-price">279 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Golden Clover',279)"><span class="product-emoji">🍀</span><div class="product-name">Golden Clover</div><div class="product-price">279 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Fleaur Halsband',249)"><span class="product-emoji">🌺</span><div class="product-name">Fleaur</div><div class="product-price">249 kr</div></button>
+      </div>
+
+      <div class="section-title">Armband</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Athena Armband',269)"><span class="product-emoji">⭐</span><div class="product-name">Athena Armband</div><div class="product-price">269 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Clover REA',219)"><span class="product-emoji">🌿</span><div class="product-name">Clover (REA)</div><div class="product-price">219 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Stella',319)"><span class="product-emoji">⭐</span><div class="product-name">Stella</div><div class="product-price">319 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Nova',319)"><span class="product-emoji">🌟</span><div class="product-name">Nova</div><div class="product-price">319 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Fleaur Armband',239)"><span class="product-emoji">🌺</span><div class="product-name">Fleaur</div><div class="product-price">239 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Paperclip Armband',159)"><span class="product-emoji">📎</span><div class="product-name">Paperclip</div><div class="product-price">159 kr</div></button>
+      </div>
+
+      <div class="section-title">Örhängen</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Bright Earrings',179)"><span class="product-emoji">✨</span><div class="product-name">Bright Earrings</div><div class="product-price">179 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Rosette',199)"><span class="product-emoji">🎀</span><div class="product-name">Rosette</div><div class="product-price">199 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Nova Hoops',239)"><span class="product-emoji">⭕</span><div class="product-name">Nova Hoops</div><div class="product-price">239 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Golden Clover Örhänge',199)"><span class="product-emoji">🍀</span><div class="product-name">Golden Clover Örhänge</div><div class="product-price">199 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Rosa Pärlemor Örhänge',199)"><span class="product-emoji">🪷</span><div class="product-name">Rosa Pärlemor Örhänge</div><div class="product-price">199 kr</div></button>
+      </div>
+
+      <div class="section-title">Lockets &amp; Charms</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Love Locket',179)"><span class="product-emoji">💌</span><div class="product-name">Love Locket</div><div class="product-price">179 kr</div></button>
+        <button class="product-btn" onclick="addToCart('11:11',129)"><span class="product-emoji">🕐</span><div class="product-name">11:11</div><div class="product-price">129 kr</div></button>
+        <button class="product-btn" onclick="addToCart('777',129)"><span class="product-emoji">7️⃣</span><div class="product-name">777</div><div class="product-price">129 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Cupid',159)"><span class="product-emoji">💘</span><div class="product-name">Cupid</div><div class="product-price">159 kr</div></button>
+      </div>
+
+      <div class="section-title">✦ Handgjort</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Joyful Jade',429)"><span class="product-emoji">🟢</span><div class="product-name">Joyful Jade</div><div class="product-price">429 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Ms. Serpentine',149)"><span class="product-emoji">🐍</span><div class="product-name">Ms. Serpentine</div><div class="product-price">149 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Princess',149)"><span class="product-emoji">👑</span><div class="product-name">Princess</div><div class="product-price">149 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Färgglad',89)"><span class="product-emoji">🌈</span><div class="product-name">Färgglad</div><div class="product-price">89 kr</div></button>
+      </div>
+
+      <div class="section-title">Scrunchies</div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-bottom:10px;letter-spacing:0.06em">🎀 2 st = 100 kr &nbsp;·&nbsp; 3 st = 150 kr</div>
+      <div class="product-grid">
+        <button class="product-btn" onclick="addToCart('Scrunchie',59)"><span class="product-emoji">🎀</span><div class="product-name">Scrunchie</div><div class="product-price">59 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Scrunchie Maxi',59)"><span class="product-emoji">🎀</span><div class="product-name">Scrunchie Maxi</div><div class="product-price">59 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Cherry Scrunchie',69)"><span class="product-emoji">🍒</span><div class="product-name">Cherry</div><div class="product-price">69 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Dots Scrunchie',69)"><span class="product-emoji">🎀</span><div class="product-name">Dots</div><div class="product-price">69 kr</div></button>
+        <button class="product-btn" onclick="addToCart('Bloom Scrunchie',59)"><span class="product-emoji">🌸</span><div class="product-name">Bloom</div><div class="product-price">59 kr</div></button>
+      </div>
+
+      <div class="section-title">Lägg till manuellt</div>
+      <div class="custom-row">
+        <input type="text" id="customName" placeholder="Namn på smycke…">
+        <input type="number" id="customPrice" placeholder="Pris (kr)" min="1" step="1">
+        <button class="btn-add-custom" onclick="addCustomItem()">+ Lägg till</button>
+      </div>
+
+      <div class="sales-section">
+        <div class="section-title">Dagens Försäljning</div>
+        <div class="sales-summary">
+          <div class="summary-card">
+            <div class="label">Antal köp</div>
+            <div class="value" id="summaryCount">0</div>
+          </div>
+          <div class="summary-card">
+            <div class="label">Moms (25%)</div>
+            <div class="value" id="summaryMoms">0 kr</div>
+          </div>
+          <div class="summary-card highlight">
+            <div class="label">Total intäkt</div>
+            <div class="value" id="summaryTotal">0 kr</div>
+          </div>
+        </div>
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>Tid</th>
+              <th>Varor</th>
+              <th>Betalning</th>
+              <th>Exkl. moms</th>
+              <th>Moms</th>
+              <th>Totalt</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="salesLog">
+            <tr><td colspan="7" class="log-empty">Inga försäljningar ännu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="layout-right">
+      <div class="cart-section">
+        <div class="cart-header">
+          <div class="cart-header-title">Kundvagn</div>
+          <button class="btn-clear" onclick="clearCart()">Töm</button>
+        </div>
+        <div id="cartBody">
+          <div class="cart-empty">Kundvagnen är tom</div>
+        </div>
+        <div class="cart-totals">
+          <div class="total-row">
+            <span>Exkl. moms</span>
+            <span id="totalExMoms">0 kr</span>
+          </div>
+          <div class="total-row">
+            <span>Moms (25%)</span>
+            <span id="totalMoms">0 kr</span>
+          </div>
+          <div class="total-row main">
+            <span>Att betala</span>
+            <span id="totalSum">0 kr</span>
+          </div>
+        </div>
+        <div class="swish-section">
+          <div class="swish-title">💳 Betalning</div>
+          <div class="swish-amount-display" id="displayAmount">0<span>kr</span></div>
+          <div class="payment-buttons">
+            <button class="btn-swish" id="btnSwish" onclick="checkout('swish')" disabled>Swish</button>
+            <button class="btn-kort" id="btnKort" onclick="checkout('kort')" disabled>Kort</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="receiptModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Kvitto</h2>
+      <p id="receiptMethod">Swish</p>
+    </div>
+    <div class="receipt-body" id="receiptItems"></div>
+    <hr class="receipt-divider">
+    <div class="receipt-total-block">
+      <div class="receipt-moms" id="receiptMomsLine">Varav moms: 0 kr</div>
+      <div class="receipt-total" id="receiptTotal">0<small>kr</small></div>
+    </div>
+    <div class="receipt-actions">
+      <button class="btn-modal secondary" onclick="closeReceipt()">Stäng</button>
+      <button class="btn-modal primary" onclick="confirmSale()">Klart, nästa</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const MOMS_RATE = 0.25; // 25% moms
+
+  let cart = [];      // { name, price, qty }
+  let salesLog = [];  // { time, items, method, exMoms, moms, total }
+  let pendingMethod = null;
+
+  function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name && item.price === price);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ name: name, price: price, qty: 1 });
+    }
+    renderCart();
+  }
+
+  function addCustomItem() {
+    const nameInput = document.getElementById('customName');
+    const priceInput = document.getElementById('customPrice');
+    const name = nameInput.value.trim();
+    const price = parseFloat(priceInput.value);
+
+    if (!name) {
+      alert('Ange ett namn på smycket.');
+      return;
+    }
+    if (!price || price <= 0) {
+      alert('Ange ett giltigt pris.');
+      return;
     }
 
-    function addCustomItem() {
-      // ...
+    addToCart(name, price);
+    nameInput.value = '';
+    priceInput.value = '';
+    nameInput.focus();
+  }
+
+  function changeQty(index, delta) {
+    cart[index].qty += delta;
+    if (cart[index].qty <= 0) {
+      cart.splice(index, 1);
+    }
+    renderCart();
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    renderCart();
+  }
+
+  function clearCart() {
+    if (cart.length === 0) return;
+    if (confirm('Töm hela kundvagnen?')) {
+      cart = [];
+      renderCart();
+    }
+  }
+
+  function calcTotals(items) {
+    const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const exMoms = total / (1 + MOMS_RATE);
+    const moms = total - exMoms;
+    return {
+      total: Math.round(total),
+      exMoms: Math.round(exMoms),
+      moms: Math.round(moms)
+    };
+  }
+
+  function renderCart() {
+    const cartBody = document.getElementById('cartBody');
+    const btnSwish = document.getElementById('btnSwish');
+    const btnKort = document.getElementById('btnKort');
+
+    if (cart.length === 0) {
+      cartBody.innerHTML = '<div class="cart-empty">Kundvagnen är tom</div>';
+      btnSwish.disabled = true;
+      btnKort.disabled = true;
+    } else {
+      let html = '<div class="cart-items">';
+      cart.forEach(function(item, index) {
+        html += '<div class="cart-item">';
+        html += '  <div class="item-left">';
+        html += '    <div class="item-name">' + escapeHtml(item.name) + '</div>';
+        html += '    <div class="qty-controls">';
+        html += '      <button class="qty-btn" onclick="changeQty(' + index + ',-1)">−</button>';
+        html += '      <div class="qty-num">' + item.qty + '</div>';
+        html += '      <button class="qty-btn" onclick="changeQty(' + index + ',1)">+</button>';
+        html += '    </div>';
+        html += '  </div>';
+        html += '  <div class="item-price">' + (item.price * item.qty) + ' kr</div>';
+        html += '  <button class="btn-remove" onclick="removeItem(' + index + ')">×</button>';
+        html += '</div>';
+      });
+      html += '</div>';
+      cartBody.innerHTML = html;
+      btnSwish.disabled = false;
+      btnKort.disabled = false;
     }
 
-    function deleteSale(idx) {
+    const totals = calcTotals(cart);
+    document.getElementById('totalExMoms').textContent = totals.exMoms + ' kr';
+    document.getElementById('totalMoms').textContent = totals.moms + ' kr';
+    document.getElementById('totalSum').textContent = totals.total + ' kr';
+    document.getElementById('displayAmount').innerHTML = totals.total + '<span>kr</span>';
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function checkout(method) {
+    if (cart.length === 0) return;
+    pendingMethod = method;
+
+    const totals = calcTotals(cart);
+    const receiptItems = document.getElementById('receiptItems');
+    let html = '';
+    cart.forEach(function(item) {
+      html += '<div class="receipt-item">';
+      html += '<span><span class="qty">' + item.qty + '×</span>' + escapeHtml(item.name) + '</span>';
+      html += '<span>' + (item.price * item.qty) + ' kr</span>';
+      html += '</div>';
+    });
+    receiptItems.innerHTML = html;
+
+    document.getElementById('receiptMethod').textContent = method === 'kort' ? '💳 Kort' : '💸 Swish';
+    document.getElementById('receiptMomsLine').textContent = 'Varav moms: ' + totals.moms + ' kr';
+    document.getElementById('receiptTotal').innerHTML = totals.total + '<small>kr</small>';
+
+    document.getElementById('receiptModal').classList.add('open');
+  }
+
+  function closeReceipt() {
+    document.getElementById('receiptModal').classList.remove('open');
+    pendingMethod = null;
+  }
+
+  function confirmSale() {
+    if (cart.length === 0 || !pendingMethod) {
+      closeReceipt();
+      return;
+    }
+
+    const totals = calcTotals(cart);
+    const now = new Date();
+    const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    const itemsSummary = cart.map(function(item) {
+      return item.qty + '× ' + item.name;
+    }).join(', ');
+
+    salesLog.push({
+      time: time,
+      items: itemsSummary,
+      method: pendingMethod,
+      exMoms: totals.exMoms,
+      moms: totals.moms,
+      total: totals.total
+    });
+
+    cart = [];
+    pendingMethod = null;
+    renderCart();
+    renderLog();
+    closeReceipt();
+  }
+
+  function deleteSale(idx) {
+    if (confirm('Ta bort denna försäljning från loggen?')) {
       salesLog.splice(idx, 1);
       renderLog();
     }
+  }
 
-    function renderLog() {
-      const tbody = document.getElementById('salesLog');
-      // ... (koden du redan har)
+  function renderLog() {
+    const tbody = document.getElementById('salesLog');
+
+    if (salesLog.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="log-empty">Inga försäljningar ännu</td></tr>';
+    } else {
+      let html = '';
+      for (let i = salesLog.length - 1; i >= 0; i--) {
+        const s = salesLog[i];
+        const method = s.method === 'kort' ? '💳 Kort' : '💸 Swish';
+        html += '<tr>';
+        html += '<td>' + s.time + '</td>';
+        html += '<td style="color:var(--muted);font-size:0.78rem">' + escapeHtml(s.items) + '</td>';
+        html += '<td>' + method + '</td>';
+        html += '<td>' + s.exMoms + ' kr</td>';
+        html += '<td>' + s.moms + ' kr</td>';
+        html += '<td style="font-weight:500">' + s.total + ' kr</td>';
+        html += '<td style="text-align:center"><button style="background:none;border:none;color:#c0392b;font-size:1.3rem;cursor:pointer;padding:0 4px;line-height:1" data-idx="' + i + '">×</button></td>';
+        html += '</tr>';
+      }
+      tbody.innerHTML = html;
+      tbody.querySelectorAll('button[data-idx]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const idx = parseInt(this.getAttribute('data-idx'));
+          deleteSale(idx);
+        });
+      });
     }
 
-    renderLog();
-  </script>
+    // Update summary cards
+    const count = salesLog.length;
+    const totalMoms = salesLog.reduce(function(sum, s) { return sum + s.moms; }, 0);
+    const totalRevenue = salesLog.reduce(function(sum, s) { return sum + s.total; }, 0);
+    document.getElementById('summaryCount').textContent = count;
+    document.getElementById('summaryMoms').textContent = totalMoms + ' kr';
+    document.getElementById('summaryTotal').textContent = totalRevenue + ' kr';
+  }
+
+  // Initial render
+  renderCart();
+  renderLog();
+</script>
 
 </body>
 </html>
